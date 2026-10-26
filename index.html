@@ -50,10 +50,12 @@
         <div class="card">  
             <label for="element-select">العنصر المختار:</label>  
             <select id="element-select">  
-                <option value="Ra226" selected>الراديوم-226 (Ra-226) - يتحلل بألفا</option>  
-                <option value="U238">اليورانيوم-238 (U-238) - يتحلل بألفا</option>  
-                <option value="C14">الكربون-14 (C-14) - يتحلل بيتا</option>  
-                <option value="I131">اليود-131 (I-131) - يتحلل بيتا</option>  
+                <option value="Ra226" selected>الراديوم-226 (Ra-226) - ألفا</option>  
+                <option value="U238">اليورانيوم-238 (U-238) - ألفا</option>  
+                <option value="C14">الكربون-14 (C-14) - بيتا</option>  
+                <option value="I131">اليود-131 (I-131) - بيتا</option>  
+                <option value="Co60">الكوبالت-60 (Co-60) - غاما</option>  
+                <option value="Tc99">التكنيشيوم-99 (Tc-99) - غاما</option>  
             </select>  
   
             <label for="decay-select">نوع التحلل:</label>  
@@ -94,7 +96,9 @@
             Ra226: { name: 'الراديوم', symbol: 'Ra', z: 88, a: 226, dSym: 'Rn', dZ: 86, dA: 222 },  
             U238: { name: 'اليورانيوم', symbol: 'U', z: 92, a: 238, dSym: 'Th', dZ: 90, dA: 234 },  
             C14: { name: 'الكربون', symbol: 'C', z: 6, a: 14, dSym: 'N', dZ: 7, dA: 14 },  
-            I131: { name: 'اليود', symbol: 'I', z: 53, a: 131, dSym: 'Xe', dZ: 54, dA: 131 }  
+            I131: { name: 'اليود', symbol: 'I', z: 53, a: 131, dSym: 'Xe', dZ: 54, dA: 131 },  
+            Co60: { name: 'الكوبالت', symbol: 'Co', z: 27, a: 60, dSym: 'Co', dZ: 27, dA: 60 },  
+            Tc99: { name: 'التكنيشيوم', symbol: 'Tc', z: 43, a: 99, dSym: 'Tc', dZ: 43, dA: 99 }  
         };  
   
         let scene, camera, renderer, controls;  
@@ -211,8 +215,7 @@
                 }  
                 anim();  
             } else if(decay === 'beta') {  
-                document.getElementById('obs-text').innerText = `👁️ تحلل بيتا: كرة زرقاء داخل النواة تتوهج وتتحول إلى حمراء (تحول نيوترون لبروتون) وانطلاق إلكترون صغير!`;  
-                // تحويل لون إحدى الكرات في النواة للون الأحمر  
+                document.getElementById('obs-text').innerText = `👁️ تحلل بيتا: كرة زرقاء داخل النواة تتوهج وتحول لبروتون وانطلاق إلكترون!`;  
                 if(nucleusGroup.children.length > 0) {  
                     nucleusGroup.children[0].material.color.setHex(0xef4444);  
                 }  
@@ -226,7 +229,7 @@
                         frame++;  
                         requestAnimationFrame(animBeta);  
                     } else {  
-                        document.getElementById('obs-text').innerText = `✨ لاحظي: نيوترون واحد أصبح بروتوناً (الكتلة ثابتة والذري زاد 1). اكتبيها بالأسفل!`;  
+                        document.getElementById('obs-text').innerText = `✨ لاحظي: نيوترون أصبح بروتوناً (الكتلة ثابتة والذري زاد 1). اكتبيها بالأسفل!`;  
                     }  
                 }  
                 animBeta();  
@@ -244,7 +247,7 @@
                         requestAnimationFrame(animGamma);  
                     } else {  
                         nucleusGroup.position.y = 0;  
-                        document.getElementById('obs-text').innerText = `✨ لا تغيير في الكرات، الطاقة وحدها انبعثت. اكتبي النتيجة!`;  
+                        document.getElementById('obs-text').innerText = `✨ لا تغيير في الكرات، الطاقة وحدها انبعثت. الكتلة والذري ثابتان!`;  
                     }  
                 }  
                 animGamma();  
